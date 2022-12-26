@@ -13,7 +13,7 @@ class AssociationLogin {
 
     public function __construct(AssociationClient $client) {
         $this->client = $client;
-        $this->login = TRUE;
+        $this->login = true;
     }
 
     public function getLogin() {
