@@ -68,13 +68,14 @@ class AdminPost
         return null;
     }
 
-    public function exeToggleStatus(string|int $id)
+    public function exeToggleStatus(string|int $id): null|array
     {
         $this->id = (int) $id;
         $read = new Read;
         $read->exeRead(self::table, 'WHERE post_id = :id_int', ['id_int' => $this->id]);
+
         if (!$read->getResult()) {
-            return ['Você tentou ativar/desativar um post que não existe.', WS_ALERT];
+            return ['Você tentou ativar/desativar um post que não existe no sistema.', WS_ALERT];
         } else {
             $post_status = $read->first()['post_status'] ? 0 : 1;
             $update = new Update;
@@ -90,7 +91,7 @@ class AdminPost
         $read->exeRead(self::table, "WHERE post_id = :id_int", ['id_int' => $this->id]);
 
         if (!$read->getResult()) {
-            return ['Você tentou remover um post que não existe.', WS_ALERT];
+            return ['Você tentou remover um post que não existe no sistema.', WS_ALERT];
         } else {
             extract($read->first());
             $coverPath = '../_uploads/' . $post_cover;
@@ -112,9 +113,9 @@ class AdminPost
 
             $delete = new Delete;
             $delete->exeDelete('ws_posts_gallery', "WHERE post_id = :id_int", ['id_int' => $this->id]);
-            $delete->exeDelete(self::table, 'WHERE post_id = :id_int', ['id_int' => $this->id]);
+            $delete->exeDelete(self::table, "WHERE post_id = :id_int", ['id_int' => $this->id]);
 
-            return ["O post {<b>{$post_title}</b>} foi removido com sucesso.", WS_SUCCESS];
+            return ["O post {<b>{$post_title}</b>} foi removido com sucesso do sistema.", WS_SUCCESS];
         }
     }
 
@@ -159,7 +160,7 @@ class AdminPost
         $this->read->exeRead('ws_posts_gallery', 'WHERE gallery_id = :id_int', ['id_int' => $id]);
         if (!$this->read->getResult()) {
             $this->result = null;
-            $this->error = ['Você tentou deletar uma imagem que não existe no sistema.', WS_ERROR];
+            return ['Você tentou deletar uma imagem que não existe no sistema.', WS_ERROR];
         } else {
             $path = '../_uploads/' . $this->read->first()['gallery_image'];
             if (file_exists($path) && !is_dir($path)) {
@@ -167,8 +168,10 @@ class AdminPost
                 $delete = new Delete;
                 $delete->exeDelete('ws_posts_gallery', 'WHERE gallery_id = :id_int', ['id_int' => $id]);
                 if ($delete->getResult()) {
-                    $this->result = ["A imagem foi removida da galeria.", WS_SUCCESS];
                     $this->error = null;
+                    return ["A imagem foi removida da galeria.", WS_SUCCESS];
+                } else {
+                    return ["Erro ao deletar imagem do banco.", WS_ERROR];
                 }
             }
         }
@@ -237,6 +240,7 @@ class AdminPost
     {
         $update = new Update;
         $update->exeUpdate(self::table, $this->data, "WHERE post_id = :id_int", ['id_int' => $this->id]);
+        
         if ($update->getResult()) {
             $read = new Read();
             $read->exeRead(self::table, 'WHERE post_id = :id_int', ['id_int' => $this->id]);
@@ -289,5 +293,4 @@ class AdminPost
             return false;
         }
     }
-
 }

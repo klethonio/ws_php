@@ -37,7 +37,7 @@ if($action == 'logout'){
 		<link rel="stylesheet" href="css/admin.css" />   
     </head>
 
-    <body class="painel">
+    <body class="panel">
 
         <header id="navadmin">
             <div class="content">
@@ -46,13 +46,13 @@ if($action == 'logout'){
 
                 <ul class="systema_nav radius">
                     <li class="username">Olá <?= $userLogin['user_name']; ?> <?= $userLogin['user_lastname']; ?></li>
-                    <li><a class="icon profile radius" href="painel.php?view=users/profile">Perfíl</a></li>
-                    <li><a class="icon users radius" href="painel.php?view=users/users">Usuários</a></li>
-                    <li><a class="icon logout radius" href="painel.php?action=logout">Sair</a></li>
+                    <li><a class="icon profile radius" href="panel.php?view=users/profile">Perfíl</a></li>
+                    <li><a class="icon users radius" href="panel.php?view=users/index">Usuários</a></li>
+                    <li><a class="icon logout radius" href="panel.php?action=logout">Sair</a></li>
                 </ul>
 
                 <nav>
-                    <h1><a href="painel.php" title="Dasboard">Dashboard</a></h1>
+                    <h1><a href="panel.php" title="Dasboard">Dashboard</a></h1>
 
                     <?php
                     //ATIVA MENU
@@ -66,22 +66,22 @@ if($action == 'logout'){
                     <ul class="menu">
                         <li class="li<?php if (in_array('posts', $linkto)) echo ' active'; ?>"><a class="opensub" onclick="return false;" href="#">Posts</a>
                             <ul class="sub">
-                                <li><a href="painel.php?view=posts/create">Criar Post</a></li>
-                                <li><a href="painel.php?view=posts/index">Listar / Editar Posts</a></li>
+                                <li><a href="panel.php?view=posts/create">Criar Post</a></li>
+                                <li><a href="panel.php?view=posts/index">Listar / Editar Posts</a></li>
                             </ul>
                         </li>
 
                         <li class="li<?php if (in_array('categories', $linkto)) echo ' active'; ?>"><a class="opensub" onclick="return false;" href="#">Categorias</a>
                             <ul class="sub">
-                                <li><a href="painel.php?view=categories/create">Criar Categoria</a></li>
-                                <li><a href="painel.php?view=categories/index">Listar / Editar Categorias</a></li>
+                                <li><a href="panel.php?view=categories/create">Criar Categoria</a></li>
+                                <li><a href="panel.php?view=categories/index">Listar / Editar Categorias</a></li>
                             </ul>
                         </li> 
 
-                        <li class="li<?php if (in_array('empresas', $linkto)) echo ' active'; ?>"><a class="opensub" onclick="return false;" href="#">Empresas</a>
+                        <li class="li<?php if (in_array('companies', $linkto)) echo ' active'; ?>"><a class="opensub" onclick="return false;" href="#">Empresas</a>
                             <ul class="sub">
-                                <li><a href="painel.php?view=empresas/create">Cadastrar Empresa</a></li>
-                                <li><a href="painel.php?view=empresas/index">Listar / Editar Empresas</a></li>
+                                <li><a href="panel.php?view=companies/create">Cadastrar Empresa</a></li>
+                                <li><a href="panel.php?view=companies/index">Listar / Editar Empresas</a></li>
                             </ul>
                         </li>
                         <li class="li"><a href="../" class="opensub">Ver Site</a></li>
@@ -92,7 +92,7 @@ if($action == 'logout'){
             </div><!--/CONTENT-->
         </header>
 
-        <div id="painel">
+        <div id="panel">
             <div class="content">
                 <?php require 'system/_partials/_messages.php'; ?>
             </div>

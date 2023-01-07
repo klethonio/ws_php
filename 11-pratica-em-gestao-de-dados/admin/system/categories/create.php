@@ -1,6 +1,6 @@
 <?php
 if (!class_exists('Login')) :
-    header('Location: ../../painel.php');
+    header('Location: ../../panel.php');
     exit;
 endif;
 ?>
@@ -28,12 +28,12 @@ endif;
             }else{
                 $type = empty($data['category_parent']) ? 'seção' : 'categoria';
                 $_SESSION['success'] = "A {$type} <b>{$data['category_title']}</b> foi cadastada com sucesso.";
-                header('Location: painel.php?view=categories/index');
+                header('Location: panel.php?view=categories/index');
             }
         }
         ?>
 
-        <form name="PostForm" action="" method="post" enctype="multipart/form-data">
+        <form name="postForm" action="" method="post" enctype="multipart/form-data">
 
 
             <label class="label">

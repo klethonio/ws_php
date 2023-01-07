@@ -1,3 +1,10 @@
+<?php
+if (!class_exists('Login')) :
+    header('Location: ../../panel.php');
+    exit;
+endif;
+?>
+
 <div class="content cat_list">
 
     <section>
@@ -13,7 +20,7 @@
             list($msg, $err) = $delete->exeDelete($delCat);
 
             $_SESSION[$err] = $msg;
-            header('Location: painel.php?view=categories/index');
+            header('Location: panel.php?view=categories/index');
             exit;
         }
 
@@ -42,8 +49,8 @@
                         <ul class="info post_actions">
                             <li><strong>Data:</strong> <?= date('d/m/Y H:i', strtotime($category_date)) ?></li>
                             <li><a class="act_view" target="_blank" href="../categoria/<?= $category_name ?>" title="Ver no site">Ver no site</a></li>
-                            <li><a class="act_edit" href="painel.php?view=categories/update&id=<?= $category_id ?>" title="Editar">Editar</a></li>
-                            <li><a class="act_delete" href="painel.php?view=categories/index&delete=<?= $category_id ?>" title="Excluir">Deletar</a></li>
+                            <li><a class="act_edit" href="panel.php?view=categories/update&id=<?= $category_id ?>" title="Editar">Editar</a></li>
+                            <li><a class="act_delete" href="panel.php?view=categories/index&delete=<?= $category_id ?>" title="Excluir">Deletar</a></li>
                         </ul>
                     </header>
 
@@ -64,8 +71,8 @@
                                 <ul class="info post_actions">
                                     <li><strong>Data:</strong> <?= date('d/n/Y H:i', strtotime($sub['category_date'])) ?></li>
                                     <li><a class="act_view" target="_blank" href="../categoria/<?= $sub['category_name'] ?>" title="Ver no site">Ver no site</a></li>
-                                    <li><a class="act_edit" href="painel.php?view=categories/update&id=<?= $sub['category_id'] ?>" title="Editar">Editar</a></li>
-                                    <li><a class="act_delete" href="painel.php?view=categories/index&delete=<?= $sub['category_id'] ?>" title="Excluir">Deletar</a></li>
+                                    <li><a class="act_edit" href="panel.php?view=categories/update&id=<?= $sub['category_id'] ?>" title="Editar">Editar</a></li>
+                                    <li><a class="act_delete" href="panel.php?view=categories/index&delete=<?= $sub['category_id'] ?>" title="Excluir">Deletar</a></li>
                                 </ul>
                             </article>
                             <?php

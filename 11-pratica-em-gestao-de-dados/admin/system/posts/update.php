@@ -1,6 +1,6 @@
 <?php
 if (!class_exists('Login')) :
-    header('Location: ../../painel.php');
+    header('Location: ../../panel.php');
     exit;
 endif;
 ?>
@@ -12,21 +12,30 @@ endif;
         <?php
         $data = filter_input_array(INPUT_POST, FILTER_DEFAULT);
         $postId = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
-        $del = filter_input(INPUT_GET, 'del', FILTER_VALIDATE_INT);
+        $imageId = filter_input(INPUT_GET, 'image-id', FILTER_VALIDATE_INT);
+        $action = filter_input(INPUT_GET, 'action', FILTER_DEFAULT);
 
-        if ($del) {
+        if ($action) {
             require '_models/AdminPost.class.php';
 
             $post = new AdminPost;
-            $post->removeImage($del);
-            if (!$post->getResult()) {
-                WSMessage($post->getError()[0], $post->getError()[1]);
-            } else {
-                $_SESSION[$post->getResult()[1]] = $post->getResult()[0];
-                header('Location: painel.php?view=posts/update&id=' . $postId);
-                exit;
+
+            switch ($action) {
+                case 'delete-image':
+                    list($msg, $err) = $post->removeImage($imageId);
+                    break;    
+
+                default:
+                    list($msg, $err) = ['Operação inválida', WS_ALERT];
+                    break;
             }
-        } elseif (!empty($data['sendPostForm'])) {
+
+            $_SESSION[$err] = $msg;
+            header('Location: panel.php?view=posts/update&id=' . $postId);
+            exit;
+        }
+
+        if (!empty($data['sendPostForm'])) {
             $data['post_status'] = ($data['sendPostForm'] == 'Atualizar' ? '0' : '1');
             unset($data['sendPostForm']);
             $data['post_cover'] = (!empty($_FILES['post_cover']['tmp_name']) ? $_FILES['post_cover'] : 'null');
@@ -47,8 +56,8 @@ endif;
                     $_SESSION[$upPost->getError()[1]] = $upPost->getError()[0];
                 }
 
-                $_SESSION['success'] = "O post <b>{$data['post_title']}</b> foi atualizado  no sistema.";
-                header('Location: painel.php?view=posts/update&id=' . $postId);
+                $_SESSION['success'] = "O post <b>{$data['post_title']}</b> foi atualizado no sistema.";
+                header('Location: panel.php?view=posts/update&id=' . $postId);
                 exit;
             }
             
@@ -58,7 +67,7 @@ endif;
 
             if (!$read->getResult()) {
                 $_SESSION['alert'] = 'Você tentou editar um artigo que não existe no sistema.';
-                header('Location: painel.php?view=posts/index');
+                header('Location: panel.php?view=posts/index');
                 exit;
             } else {
                 $data = $read->first();
@@ -71,7 +80,7 @@ endif;
             <h1>Criar Post:</h1>
         </header>
 
-        <form name="PostForm" action="" method="post" enctype="multipart/form-data">
+        <form name="postForm" action="" method="post" enctype="multipart/form-data">
 
             <label class="label">
                 <span class="field">Enviar Capa:</span>
@@ -170,7 +179,7 @@ endif;
                             <div class="img thumb_small">
                                 <?=Prepare::getImage('../_uploads/' . $image['gallery_image'], $i, 146, 100)?>
                             </div>
-                            <a class="del" href="painel.php?view=posts/update&id=<?=$postId?>&del=<?=$image['gallery_id']?>" onclick="return confirm('Tem certeza que deseja realizar essa operação?')">Deletar</a>                    
+                            <a class="del" href="panel.php?view=posts/update&id=<?=$postId?>&image-id=<?=$image['gallery_id']?>&action=delete-image" onclick="return confirm('Tem certeza que deseja realizar essa operação?')">Deletar</a>                    
                         </li>
                     <?php
                         }

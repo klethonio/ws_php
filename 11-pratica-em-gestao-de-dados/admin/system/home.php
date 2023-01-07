@@ -56,11 +56,11 @@
                     <h1><a target="_blank" href="../artigo/uri-do-artigo" title="Ver Post">Tchau iPhone: Galaxy S3 supera o 4S e é o celular mais vendido do mundo</a></h1>
                     <ul class="info post_actions">
                         <li><strong>Data:</strong> <?= date('d/m/Y H:i'); ?>Hs</li>
-                        <li><a class="act_view" target="_blank" href="painel.php?exe=posts/post&id=ID_DO_POST" title="Ver no site">Ver no site</a></li>
-                        <li><a class="act_edit" href="painel.php?exe=posts/post&id=ID_DO_POST" title="Editar">Editar</a></li>
-                        <!--<li><a class="act_inative" href="painel.php?exe=posts/post&id=ID_DO_POST" title="Ativar">Ativar</a></li>-->
-                        <li><a class="act_ative" href="painel.php?exe=posts/post&id=ID_DO_POST" title="Inativar">Ativar</a></li>
-                        <li><a class="act_delete" href="painel.php?exe=posts/post&id=ID_DO_POST" title="Excluir">Deletar</a></li>
+                        <li><a class="act_view" target="_blank" href="panel.php?exe=posts/post&id=ID_DO_POST" title="Ver no site">Ver no site</a></li>
+                        <li><a class="act_edit" href="panel.php?exe=posts/post&id=ID_DO_POST" title="Editar">Editar</a></li>
+                        <!--<li><a class="act_inative" href="panel.php?exe=posts/post&id=ID_DO_POST" title="Ativar">Ativar</a></li>-->
+                        <li><a class="act_ative" href="panel.php?exe=posts/post&id=ID_DO_POST" title="Inativar">Ativar</a></li>
+                        <li><a class="act_delete" href="panel.php?exe=posts/post&id=ID_DO_POST" title="Excluir">Deletar</a></li>
                     </ul>
 
                 </article>
@@ -78,11 +78,11 @@
                     <h1><a target="_blank" href="../artigo/uri-do-artigo" title="Ver Post">Tchau iPhone: Galaxy S3 supera o 4S e é o celular mais vendido do mundo</a></h1>
                     <ul class="info post_actions">
                         <li><strong>Data:</strong> <?= date('d/m/Y H:i'); ?>Hs</li>
-                        <li><a class="act_view" target="_blank" href="painel.php?exe=posts/post&id=ID_DO_POST" title="Ver no site">Ver no site</a></li>
-                        <li><a class="act_edit" href="painel.php?exe=posts/post&id=ID_DO_POST" title="Editar">Editar</a></li>
-                        <!--<li><a class="act_inative" href="painel.php?exe=posts/post&id=ID_DO_POST" title="Ativar">Ativar</a></li>-->
-                        <li><a class="act_ative" href="painel.php?exe=posts/post&id=ID_DO_POST" title="Inativar">Ativar</a></li>
-                        <li><a class="act_delete" href="painel.php?exe=posts/post&id=ID_DO_POST" title="Excluir">Deletar</a></li>
+                        <li><a class="act_view" target="_blank" href="panel.php?exe=posts/post&id=ID_DO_POST" title="Ver no site">Ver no site</a></li>
+                        <li><a class="act_edit" href="panel.php?exe=posts/post&id=ID_DO_POST" title="Editar">Editar</a></li>
+                        <!--<li><a class="act_inative" href="panel.php?exe=posts/post&id=ID_DO_POST" title="Ativar">Ativar</a></li>-->
+                        <li><a class="act_ative" href="panel.php?exe=posts/post&id=ID_DO_POST" title="Inativar">Ativar</a></li>
+                        <li><a class="act_delete" href="panel.php?exe=posts/post&id=ID_DO_POST" title="Excluir">Deletar</a></li>
                     </ul>
 
                 </article>

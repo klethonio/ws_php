@@ -2,22 +2,34 @@
 
     <article>
 
-        <h1>Cadastrar Usuário!</h1>
+        <h1>Atualizar Usuário!</h1>
 
         <?php
         $ClienteData = filter_input_array(INPUT_POST, FILTER_DEFAULT);
+        $userId = filter_input(INPUT_GET, 'userid', FILTER_VALIDATE_INT);
+
         if ($ClienteData && $ClienteData['SendPostForm']):
             unset($ClienteData['SendPostForm']);
 
             require('_models/AdminUser.class.php');
             $cadastra = new AdminUser;
-            $cadastra->ExeCreate($ClienteData);
+            $cadastra->exeUpdate($userId, $ClienteData);
 
-            if ($cadastra->getResult()):
-                header("Location: panel.php?exe=users/update&create=true&userid={$cadastra->getResult()}");
+            WSErro($cadastra->getError()[0], $cadastra->getError()[1]);
+        else:
+            $ReadUser = new Read;
+            $ReadUser->exeRead("ws_users", "WHERE user_id = :userid", "userid={$userId}");
+            if (!$ReadUser->getResult()):
+
             else:
-                WSErro($cadastra->getError()[0], $cadastra->getError()[1]);
+                $ClienteData = $ReadUser->getResult()[0];
+                unset($ClienteData['user_password']);
             endif;
+        endif;
+
+        $checkCreate = filter_input(INPUT_GET, 'create', FILTER_VALIDATE_BOOLEAN);
+        if ($checkCreate && empty($cadastra)):
+            WSErro("O usuário <b>{$ClienteData['user_name']}</b> foi cadastrado com sucesso no sistema!", WS_ACCEPT);
         endif;
         ?>
 
@@ -64,7 +76,6 @@
                         value="<?php if (!empty($ClienteData['user_password'])) echo $ClienteData['user_password']; ?>"
                         title = "Informe sua senha [ de 6 a 12 caracteres! ]"
                         pattern = ".{6,12}"
-                        required
                         />
                 </label>
 
@@ -80,7 +91,7 @@
                 </label>
             </div><!-- LABEL LINE -->
 
-            <input type="submit" name="SendPostForm" value="Cadastrar Usuário" class="btn green" />
+            <input type="submit" name="SendPostForm" value="Atualizar Usuário" class="btn blue" />
         </form>
 
     </article>

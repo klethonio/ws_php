@@ -1,6 +1,6 @@
 <?php
 if (!class_exists('Login')) :
-    header('Location: ../../painel.php');
+    header('Location: ../../panel.php');
     exit;
 endif;
 ?>
@@ -38,14 +38,14 @@ endif;
                 }
 
                 $_SESSION['success'] = "O post <b>{$post['post_title']}</b> foi cadastado com sucesso.";
-                header('Location: painel.php?view=posts/update&id=' . $post['post_id']);
+                header('Location: panel.php?view=posts/update&id=' . $post['post_id']);
                 exit;
             }
         }
         ?>
 
 
-        <form name="PostForm" action="" method="post" enctype="multipart/form-data">
+        <form name="postForm" action="" method="post" enctype="multipart/form-data">
 
             <label class="label">
                 <span class="field">Enviar Capa:</span>

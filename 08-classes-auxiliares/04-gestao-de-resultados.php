@@ -74,9 +74,9 @@
         $pager->range($page);
 
         $read = new Read();
-        $read->exeRead('app_cidades', 'LIMIT :limit_int OFFSET :offset_int', ['limit_int' => $pager->getLimit(), 'offset_int' => $pager->getOffset()]);
+        $read->exeRead('app_cities', 'LIMIT :limit_int OFFSET :offset_int', ['limit_int' => $pager->getLimit(), 'offset_int' => $pager->getOffset()]);
         
-        $pager->exePagination('app_cidades');
+        $pager->exePagination('app_cities');
 
         echo $pager->renderSelectIpp();
         echo $pager->renderPagination();

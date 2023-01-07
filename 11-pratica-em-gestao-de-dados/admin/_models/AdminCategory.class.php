@@ -64,7 +64,7 @@ class AdminCategory
         $this->read->exeRead(self::table, "WHERE category_id = :category_id_int", ['category_id_int' => $this->id]);
 
         if (!$this->read->getResult()) {
-            return ['Você tentou remover uma categoria que não existe.', WS_ALERT];
+            return ['Você tentou remover uma categoria que não existe no sistema.', WS_ALERT];
         } else {
             extract($this->read->first());
 
@@ -76,7 +76,7 @@ class AdminCategory
                 $type = empty($category_parent) ? 'seção' : 'categoria';
                 $delete = new Delete;
                 $delete->exeDelete(self::table, 'WHERE category_id = :category_id_int', ['category_id_int' => $this->id]);
-                return ["A {$type} <b>{$category_title}</b> foi removida com sucesso.", WS_SUCCESS];
+                return ["A {$type} <b>{$category_title}</b> foi removida com sucesso do sistema.", WS_SUCCESS];
             }
         }
     }

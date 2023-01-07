@@ -24,7 +24,7 @@ require('../_app/Config.inc.php');
                 $login = new Login(3);
 
                 if ($login->checkLogin()) {
-                    header('Location: painel.php');
+                    header('Location: panel.php');
                     exit;
                 }
 
@@ -34,7 +34,7 @@ require('../_app/Config.inc.php');
                     if (!$login->getResult()) {
                         WSMessage($login->getError()[0], $login->getError()[1]);
                     } else {
-                        header('Location: painel.php');
+                        header('Location: panel.php');
                         exit;
                     }
                 }
