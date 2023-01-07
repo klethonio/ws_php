@@ -75,6 +75,7 @@ class Pager
      */
     public function returnPage() {
         header("Location: {$this->url}{$this->parseUrl}{$this->numPages}");
+        exit;
     }
 
     /**
